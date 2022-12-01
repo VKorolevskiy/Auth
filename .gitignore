@@ -1,0 +1,12 @@
+# Project exclude paths
+/.idea
+/.env
+/.env.local
+/core/vendor
+/frontend/node_modules
+/frontend/.nuxt
+/frontend/.eslintcache
+/frontend/dist
+/frontend/src/site/static/sw.js
+/tmp
+/upload
