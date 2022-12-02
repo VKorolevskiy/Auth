@@ -16,6 +16,8 @@ $group = $app->group(
 
         $group->any('/user/profile', App\Controllers\User\Profile::class);
         $group->get('/image/{id}', App\Controllers\Image::class);
+        $group->any('/registration', App\Controllers\Security\Registration::class);
+        $group->any('/action', App\Controllers\Security\Action::class);
 
         $group->group(
             '/admin',

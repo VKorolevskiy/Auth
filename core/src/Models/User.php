@@ -15,12 +15,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property bool $active
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
+ * @property int $code_verified_at
+ * @property string $remember_token
  * @property-read UserToken[] $tokens
  */
 class User extends \Vesp\Models\User
 {
-    protected $fillable = ['username', 'password', 'fullname', 'email', 'role_id', 'active'];
+    protected $fillable = ['username', 'code_verified_at', 'remember_token','password',  'fullname', 'email', 'role_id', 'active'];
 
     public function tokens(): HasMany
     {

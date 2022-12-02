@@ -7,12 +7,14 @@ export default {
   security: {
     username: 'Логин',
     password: 'Пароль',
+    confirmpassword: 'Повторите пароль',
     login: 'Вход',
     logout: 'Выход',
     register: 'Регистрация',
     greetings: 'Привет!',
     goodbye: 'Пока, пока...',
     profile: 'Профиль',
+    success: 'Успешно!',
     success_update_message: 'Ваш профиль был успешно обновлён!',
   },
   models: {
@@ -25,6 +27,7 @@ export default {
       email: 'Email',
       active: 'Активно',
       role: 'Группа',
+      action_code: 'Код из сообщения',
     },
     user_role: {
       title_one: 'Группа',
@@ -37,7 +40,9 @@ export default {
   errors: {
     security: {
       inactive: 'Ваш аккаунт неактивен',
+      confirmpassword: 'Пароли не совпадают',
       wrong: 'Неправильное имя или пароль',
+      active: 'Ваш аккаунт уже зарегистрирован',
     },
   },
 }

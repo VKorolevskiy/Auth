@@ -28,6 +28,8 @@ class Users extends Migration
                 $table->string('email')->nullable();
                 $table->foreignId('role_id')
                     ->constrained('user_roles')->cascadeOnDelete();
+                $table->string('code_verified_at')->nullable();
+                $table->rememberToken();
                 $table->boolean('active')->default(true)->index();
                 $table->timestamps();
             }
