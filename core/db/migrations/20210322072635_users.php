@@ -25,10 +25,11 @@ class Users extends Migration
                 $table->string('username')->unique();
                 $table->string('password');
                 $table->string('fullname')->nullable();
-                $table->string('email')->nullable();
+                $table->string('email')->unique()->nullable();
+                $table->string('phone')->unique()->nullable();
                 $table->foreignId('role_id')
                     ->constrained('user_roles')->cascadeOnDelete();
-                $table->string('code_verified_at')->nullable();
+                $table->string('code_verified')->nullable();
                 $table->rememberToken();
                 $table->boolean('active')->default(true)->index();
                 $table->timestamps();

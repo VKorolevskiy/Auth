@@ -13,7 +13,7 @@ class Action extends Controller
         $action_code= trim($this->getProperty('action_code', ''));
         $id = trim($this->getProperty('id', ''));
         if ($user = User::query()->where('id', $id)->first()) {
-            if ($user->code_verified_at == $action_code) {
+            if ($user->code_verified == $action_code) {
                 $user->setAttribute('active', 1);
                 $user->save();
                 return $this->success();

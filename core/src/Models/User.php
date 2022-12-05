@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $password
  * @property string $fullname
  * @property string $email
+ * @property string $code_verified
  * @property int $role_id
  * @property bool $active
  * @property Carbon $created_at
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class User extends \Vesp\Models\User
 {
-    protected $fillable = ['username', 'code_verified_at', 'remember_token','password',  'fullname', 'email', 'role_id', 'active'];
+    protected $fillable = ['username', 'code_verified', 'phone', 'remember_token','password',  'fullname', 'email', 'role_id', 'active'];
 
     public function tokens(): HasMany
     {

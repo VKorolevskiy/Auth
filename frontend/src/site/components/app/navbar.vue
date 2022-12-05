@@ -5,7 +5,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="d-flex w-100">
           <b-nav-dropdown v-if="$auth.loggedIn" :text="$auth.user.fullname" class="ml-md-auto" right>
-            <b-dropdown-item v-if="$hasScope('profile')" :to="{name: 'user-profile'}">
+            <b-dropdown-item v-if="$hasScope('profile')" :to="{name: 'profile'}">
               {{ $t('security.profile') }}
             </b-dropdown-item>
             <b-dropdown-divider />
@@ -40,6 +40,7 @@ export default {
     async onLogout() {
       await this.$auth.logout()
       this.$toast.info(this.$t('security.goodbye'))
+      this.$router.replace('/login')
     },
   },
 }
