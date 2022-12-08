@@ -41,7 +41,7 @@ class Registration extends \Vesp\Controllers\Security\Login
         if ($user = User::query()->where(['username' => $username, 'active' => 0])->first()) {
 
            $code = ['id' => $user->id];
-           PhpMail::composeEmail($email, $fullname, $messages, $subject);
+           // PhpMail::composeEmail($email, $fullname, $messages, $subject);
            return  $this->success($code);
 
 

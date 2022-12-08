@@ -18,6 +18,9 @@ class Action extends Controller
                 $user->save();
                 return $this->success();
             }
+            else {
+                return $this->failure('errors.security.code');
+            }
         }
 
     }
