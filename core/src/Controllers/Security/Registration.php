@@ -4,10 +4,8 @@ namespace App\Controllers\Security;
 
 use App\Models\User;
 use Psr\Http\Message\ResponseInterface;
+use App\Controllers\PhpMail;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
 class Registration extends \Vesp\Controllers\Security\Login
 {
@@ -19,25 +17,10 @@ class Registration extends \Vesp\Controllers\Security\Login
         $password = trim($this->getProperty('password', ''));
         $fullname = trim($this->getProperty('fullname', ''));
         $email = trim($this->getProperty('email', ''));
-        $code_action = '12345'; //  for sms or email  verificatio
+        $code_action = rand(10000, 100000);  //  for sms or email  verificatio
+        $subject = 'Finish creating your account on ' . getenv('APP_NAME');
+        $messages = 'Almost there!<br>Your login code is:<br><b>'.$code_action.'</b>';
 
-
-        $mail = new PHPMailer(true);
-
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            $mail->isSMTP();
-            $mail->Host       = getenv('APP_SMTP_HOST');
-            $mail->SMTPAuth   = true;
-            $mail->Username   = getenv('APP_SMTP_USERNAME');
-            $mail->Password   = getenv('APP_SMTP_PASSWORD');
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
-            $mail->setFrom(getenv('APP_SMTP_USERNAME'), getenv('APP_NAME'));
-            $mail->addAddress($email, $fullname);     //Add a recipient
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Finish creating your account on '.getenv('APP_NAME');
-            $mail->Body    = 'Almost there!<br>Your login code is:<br><b>'.$code_action.'</b>';
-            $mail->send();
 
 
         $data = [
@@ -56,8 +39,12 @@ class Registration extends \Vesp\Controllers\Security\Login
         }
 
         if ($user = User::query()->where(['username' => $username, 'active' => 0])->first()) {
-            $code = ['id' => $user->id];
-            return $this->success($code);
+
+           $code = ['id' => $user->id];
+           PhpMail::composeEmail($email, $fullname, $messages, $subject);
+           return  $this->success($code);
+
+
         }
         else {
             return $this->failure('errors.security.active');

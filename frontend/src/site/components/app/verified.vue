@@ -47,7 +47,6 @@ export default {
     },
     onReset() {
       this.login = {
-        id: '',
         action_code: '',
         username: '',
         password: '',
